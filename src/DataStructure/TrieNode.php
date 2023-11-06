@@ -4,10 +4,12 @@ namespace DataStructure;
 
 class TrieNode
 {
-    public $value;
+    public $children;
+    public $endOfWord;
 
-    public function __construct(string $value)
+    public function __construct()
     {
-        $this->value = $value;
+        $this->children = [];
+        $this->endOfWord = false;
     }
 }

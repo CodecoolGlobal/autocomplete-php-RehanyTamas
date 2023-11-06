@@ -8,12 +8,22 @@ class Trie
 
     public function __construct()
     {
-        $this->root = new TrieNode('');
+        $this->root = new TrieNode();
     }
 
     public function insert(string $word)
     {
-        // Your code goes here
+        $current =  $this->root;
+
+       for ($i=0; $i < strlen($word); $i++){
+           $char = $word[$i];
+
+            if(!isset($current->children[$char])){
+                $current->children[$char] = new TrieNode();
+            }
+            $current = $current->children[$char];
+       }
+       $current->endOfWord = true;
     }
 
     public function remove(string $word)
