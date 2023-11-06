@@ -28,6 +28,31 @@ class Trie
 
     public function remove(string $word)
     {
-        // OPTIONAL! Your code goes here
+        return $this->removeAssist($this->root,$word,0);
     }
+
+    private function removeAssist($node,$word,$index){
+        if($index === strlen($word)){
+            if($node->endOfWord){
+                $node->endOfWord = false;
+                return true;
+            }
+            return false;
+        }
+
+        $char = $word[$index];
+        if(!isset($node->children[$char])){
+            return false; //Word not found
+        }
+
+        $result = $this->removeAssist($node->children[$char],$word,$index+1);
+
+        if($result && empty($node->children[$char]->children) && !$node->children[$char]->endOfWord){
+            unset($node->children[$char]);
+        }
+
+        return $result;
+
+    }
+
 }
